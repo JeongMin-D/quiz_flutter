@@ -5,16 +5,16 @@ import 'package:quiz_app_test/model/model_quiz.dart';
 import 'package:quiz_app_test/screen/screen_result.dart';
 import 'package:quiz_app_test/widget/widget_candidate.dart';
 
-class QuizScreen extends StatefulWidget {
+class Quizox extends StatefulWidget {
   List<Quiz> quizs;
-  QuizScreen({this.quizs});
+  Quizox({this.quizs});
   @override
-  _QuizScreenState createState() => _QuizScreenState();
+  _QuizoxState createState() => _QuizoxState();
 }
 
-class _QuizScreenState extends State<QuizScreen> {
+class _QuizoxState extends State<Quizox> {
   List<int> _answers = [-1, -1, -1];
-  List<bool> _answerState = [false, false, false, false];
+  List<bool> _answerState = [false, false];
   int _currentIndex = 0;
   SwiperController _controller = SwiperController();
 
@@ -116,7 +116,7 @@ class _QuizScreenState extends State<QuizScreen> {
                               ),
                             );
                           } else {
-                            _answerState = [false, false, false, false];
+                            _answerState = [false, false];
                             _currentIndex += 1;
                             _controller.next();
                           }
@@ -132,7 +132,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
   List<Widget> _buildCandidates(double width, Quiz quiz) {
     List<Widget> _children = [];
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 2; i++) {
       _children.add(
         CandWidget(
           index: i,
@@ -141,7 +141,7 @@ class _QuizScreenState extends State<QuizScreen> {
           answerState: _answerState[i],
           tap: () {
             setState(() {
-              for (int j = 0; j < 4; j++) {
+              for (int j = 0; j < 2; j++) {
                 if (j == i) {
                   _answerState[j] = true;
                   _answers[_currentIndex] = j;
