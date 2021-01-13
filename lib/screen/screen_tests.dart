@@ -13,7 +13,8 @@ class Quiztest extends StatefulWidget {
 }
 
 class _QuiztestState extends State<Quiztest> {
-  List<int> _answers = [-1, -1, -1];
+  var _answers = List.filled(3, -1); //문제 수를 정하기 위해 첫번째 숫자를 바꿔주세요.
+  //List<int> _answers = [-1, -1, -1];
   List<bool> _answerState = [false, false, false, false];
   int _currentIndex = 0;
   SwiperController _controller = SwiperController();
