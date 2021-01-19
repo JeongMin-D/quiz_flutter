@@ -12,6 +12,10 @@ class WrongScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    double width = screenSize.width;
+    double height = screenSize.height;
+
     var wrongMap = Map<String, String>();
     for (int i = 0; i < quizs.length; i++) {
       if (quizs[i].answer != answers[i]) {
@@ -23,6 +27,17 @@ class WrongScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text('오답노트'),
+          actions: <Widget>[
+            new IconButton(
+              icon: new Icon(Icons.home),
+              tooltip: 'Home!',
+              // ignore: sdk_version_set_literal
+              onPressed: () => {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()))
+              },
+            )
+          ],
         ),
         body: ListView.separated(
           padding: const EdgeInsets.all(8),
@@ -34,8 +49,6 @@ class WrongScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Expanded(
-                    // height: 150,
-                    // padding: const EdgeInsets.all(16),
                     child: Center(
                         child: Text(
                       '문제: ${quiz_title[index]}\n정답: ${quiz_answer[index]}',
@@ -43,7 +56,7 @@ class WrongScreen extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     )),
-                  )
+                  ),
                 ],
               ),
             );

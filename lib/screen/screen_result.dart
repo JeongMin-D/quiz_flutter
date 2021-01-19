@@ -27,15 +27,26 @@ class ResultScreen extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: Text('My Quiz APP'),
-            backgroundColor: Colors.deepPurple,
+            backgroundColor: Colors.blue,
             leading: Container(),
+            actions: <Widget>[
+              new IconButton(
+                icon: new Icon(Icons.home),
+                tooltip: 'Home!',
+                // ignore: sdk_version_set_literal
+                onPressed: () => {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()))
+                },
+              )
+            ],
           ),
           body: Center(
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.deepPurple),
-                color: Colors.deepPurple,
+                border: Border.all(color: Colors.blue),
+                color: Colors.blue,
               ),
               width: width * 0.85,
               height: height * 0.5,
@@ -47,7 +58,7 @@ class ResultScreen extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.deepPurple),
+                      border: Border.all(color: Colors.blue),
                       color: Colors.white,
                     ),
                     width: width * 0.73,

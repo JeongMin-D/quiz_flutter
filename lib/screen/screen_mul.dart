@@ -31,12 +31,12 @@ class _QuizmulState extends State<Quizmul> {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.white,
         body: Center(
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: Colors.deepPurple),
+              border: Border.all(color: Colors.white),
             ),
             width: width * 1,
             height: height * 1,
@@ -138,7 +138,7 @@ class _QuizmulState extends State<Quizmul> {
                       ? Text('결과보기')
                       : Text('다음문제'),
                   textColor: Colors.white,
-                  color: Colors.deepPurple,
+                  color: Colors.blue,
                   onPressed: _answers[_currentIndex] == -1
                       ? null
                       : () {

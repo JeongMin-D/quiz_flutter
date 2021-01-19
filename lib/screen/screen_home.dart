@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
           key: _scaffoldKey,
           appBar: AppBar(
             title: Text('주원통운과 함께'),
-            backgroundColor: Colors.blueAccent,
+            backgroundColor: Colors.blue,
             leading: Container(),
           ),
           body: Column(
