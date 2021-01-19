@@ -4,6 +4,8 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:quiz_app_test/model/model_quiz.dart';
 import 'package:quiz_app_test/screen/screen_result.dart';
 import 'package:quiz_app_test/widget/widget_candidate.dart';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:quiz_app_test/config/constants.dart';
 
 class Quizox extends StatefulWidget {
   List<Quiz> quizs;
@@ -18,6 +20,8 @@ class _QuizoxState extends State<Quizox> {
   List<bool> _answerState = [false, false];
   int _currentIndex = 0;
   SwiperController _controller = SwiperController();
+  CountDownController timerController = CountDownController();
+  int _timer = timer;
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +37,8 @@ class _QuizoxState extends State<Quizox> {
               borderRadius: BorderRadius.circular(20),
               border: Border.all(color: Colors.deepPurple),
             ),
-            width: width * 0.85,
-            height: height * 0.5,
+            width: width * 1,
+            height: height * 1,
             child: Swiper(
               controller: _controller,
               physics: NeverScrollableScrollPhysics(),
@@ -59,6 +63,37 @@ class _QuizoxState extends State<Quizox> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
+          Container(
+              child: CircularCountDownTimer(
+            controller: timerController,
+            color: Colors.white,
+            duration: _timer,
+            isReverse: true,
+            isReverseAnimation: true,
+            fillColor: Colors.blue,
+            backgroundColor: Colors.white,
+            height: 80,
+            width: 80,
+            onComplete: () {
+              print("passed");
+
+              if (_currentIndex == widget.quizs.length - 1) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResultScreen(
+                      answers: _answers,
+                      quizs: widget.quizs,
+                    ),
+                  ),
+                );
+              } else {
+                _answerState = [false, false];
+                _currentIndex += 1;
+                _controller.next();
+              }
+            },
+          )),
           Container(
             padding: EdgeInsets.fromLTRB(0, width * 0.024, 0, width * 0.024),
             child: Text(

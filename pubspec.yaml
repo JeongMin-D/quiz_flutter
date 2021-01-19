@@ -26,7 +26,8 @@ dependencies:
   flutter_swiper:
   auto_size_text:
   http:
-
+  circular_countdown_timer: ^0.0.7
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

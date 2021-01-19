@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
       isLoading = true;
     });
     final response =
-        await http.get('https://quiz-api-server.herokuapp.com/quiz/Mul/3');
+        await http.get('https://quiz-api-server.herokuapp.com/quiz/Mul/10');
     if (response.statusCode == 200) {
       setState(() {
         quizs = parseQuizs(utf8.decode(response.bodyBytes));
@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
       isLoading = true;
     });
     final response =
-        await http.get('https://quiz-api-server.herokuapp.com/quiz/Test/3');
+        await http.get('https://quiz-api-server.herokuapp.com/quiz/Test/8');
     if (response.statusCode == 200) {
       setState(() {
         quizs = parseQuizs(utf8.decode(response.bodyBytes));
@@ -78,8 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Scaffold(
           key: _scaffoldKey,
           appBar: AppBar(
-            title: Text('My Quiz APP'),
-            backgroundColor: Colors.deepPurple,
+            title: Text('주원통운과 함께'),
+            backgroundColor: Colors.blueAccent,
             leading: Container(),
           ),
           body: Column(
@@ -89,32 +89,23 @@ class _HomeScreenState extends State<HomeScreen> {
               Center(
                 child: Image.asset(
                   'images/quiz.jpeg',
-                  width: width * 0.8,
+                  width: width * 0.5,
                 ),
               ),
               Padding(
                 padding: EdgeInsets.all(width * 0.024),
               ),
-              // Text(
-              //   '플러터 퀴즈 앱',
-              //   style: TextStyle(
-              //     fontSize: width * 0.065,
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              // ),
-              // Text(
-              //   '퀴즈를 풀기 전 안내사항입니다.\n꼼꼼히 읽고 퀴즈 풀기를 눌러주세요.',
-              //   textAlign: TextAlign.center,
-              // ),
-              // Padding(
-              //   padding: EdgeInsets.all(width * 0.048),
-              // ),
-              // _buildStep(width, '1. 랜덤으로 나오는 퀴즈 3개를 풀어보세요.'),
-              // _buildStep(width, '2. 문제를 잘 읽고 정답을 고른 뒤\n다음 문제 버튼을 눌러주세요.'),
-              // _buildStep(width, '3. 만점을 향해 도전해보세요!'),
-              // Padding(
-              //   padding: EdgeInsets.all(width * 0.048),
-              // ),
+              Text(
+                '주원통운 퀴즈 서버 샘플',
+                style: TextStyle(
+                  fontSize: width * 0.065,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                '주원통운 문제 은행 샘플입니다.\n퀴즈 풀기를 눌러주세요.',
+                textAlign: TextAlign.center,
+              ),
               Container(
                 padding: EdgeInsets.only(bottom: width * 0.036),
                 child: Center(
@@ -129,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         'OX',
                         style: TextStyle(color: Colors.white),
                       ),
-                      color: Colors.deepPurple,
+                      color: Colors.blue,
                       onPressed: () {
                         _scaffoldKey.currentState.showSnackBar(
                           SnackBar(
@@ -159,7 +150,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-
               Container(
                 padding: EdgeInsets.only(bottom: width * 0.036),
                 child: Center(
@@ -174,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         '객관식',
                         style: TextStyle(color: Colors.white),
                       ),
-                      color: Colors.deepPurple,
+                      color: Colors.blue,
                       onPressed: () {
                         _scaffoldKey.currentState.showSnackBar(
                           SnackBar(
@@ -204,7 +194,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-
               Container(
                 padding: EdgeInsets.only(bottom: width * 0.036),
                 child: Center(
@@ -219,7 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         '기출문제',
                         style: TextStyle(color: Colors.white),
                       ),
-                      color: Colors.deepPurple,
+                      color: Colors.blue,
                       onPressed: () {
                         _scaffoldKey.currentState.showSnackBar(
                           SnackBar(

@@ -4,6 +4,8 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:quiz_app_test/model/model_quiz.dart';
 import 'package:quiz_app_test/screen/screen_result.dart';
 import 'package:quiz_app_test/widget/widget_candidate.dart';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:quiz_app_test/config/constants.dart';
 
 class Quizmul extends StatefulWidget {
   List<Quiz> quizs;
@@ -13,17 +15,20 @@ class Quizmul extends StatefulWidget {
 }
 
 class _QuizmulState extends State<Quizmul> {
-  var _answers = List.filled(3, -1); //문제 수를 정하기 위해 첫번째 숫자를 바꿔주세요.
+  var _answers = List.filled(10, -1); //문제 수를 정하기 위해 첫번째 숫자를 바꿔주세요.
   // List<int> _answers = [-1, -1, -1];
   List<bool> _answerState = [false, false, false, false];
   int _currentIndex = 0;
   SwiperController _controller = SwiperController();
+  CountDownController timerController = CountDownController();
+  int _timer = timer;
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     double width = screenSize.width;
     double height = screenSize.height;
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.deepPurple,
@@ -33,8 +38,8 @@ class _QuizmulState extends State<Quizmul> {
               borderRadius: BorderRadius.circular(20),
               border: Border.all(color: Colors.deepPurple),
             ),
-            width: width * 0.85,
-            height: height * 0.5,
+            width: width * 1,
+            height: height * 1,
             child: Swiper(
               controller: _controller,
               physics: NeverScrollableScrollPhysics(),
@@ -59,6 +64,37 @@ class _QuizmulState extends State<Quizmul> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
+          Container(
+              child: CircularCountDownTimer(
+            controller: timerController,
+            color: Colors.white,
+            duration: _timer,
+            isReverse: true,
+            isReverseAnimation: true,
+            fillColor: Colors.blue,
+            backgroundColor: Colors.white,
+            height: 80,
+            width: 80,
+            onComplete: () {
+              print("passed");
+
+              if (_currentIndex == widget.quizs.length - 1) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResultScreen(
+                      answers: _answers,
+                      quizs: widget.quizs,
+                    ),
+                  ),
+                );
+              } else {
+                _answerState = [false, false, false, false];
+                _currentIndex += 1;
+                _controller.next();
+              }
+            },
+          )),
           Container(
             padding: EdgeInsets.fromLTRB(0, width * 0.024, 0, width * 0.024),
             child: Text(
@@ -154,6 +190,7 @@ class _QuizmulState extends State<Quizmul> {
           },
         ),
       );
+
       _children.add(
         Padding(
           padding: EdgeInsets.all(width * 0.024),

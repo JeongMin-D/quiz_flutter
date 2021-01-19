@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app_test/model/model_quiz.dart';
 import 'package:quiz_app_test/screen/screen_home.dart';
+import 'package:quiz_app_test/screen/screen_wrong.dart';
 
 class ResultScreen extends StatelessWidget {
   List<int> answers;
@@ -50,7 +51,7 @@ class ResultScreen extends StatelessWidget {
                       color: Colors.white,
                     ),
                     width: width * 0.73,
-                    height: height * 0.25,
+                    height: height * 0.3,
                     child: Column(
                       children: <Widget>[
                         Container(
@@ -92,7 +93,7 @@ class ResultScreen extends StatelessWidget {
                     child: Container(),
                   ),
                   Container(
-                    padding: EdgeInsets.only(bottom: width * 0.048),
+                    padding: EdgeInsets.only(bottom: width * 0.012),
                     child: ButtonTheme(
                       minWidth: width * 0.73,
                       height: height * 0.05,
@@ -107,6 +108,32 @@ class ResultScreen extends StatelessWidget {
                           }));
                         },
                         child: Text('홈으로 돌아가기'),
+                        color: Colors.white,
+                        textColor: Colors.black,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(bottom: width * 0.048),
+                    child: ButtonTheme(
+                      minWidth: width * 0.73,
+                      height: height * 0.05,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: RaisedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => WrongScreen(
+                                answers: answers,
+                                quizs: quizs,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Text('오답노트'),
                         color: Colors.white,
                         textColor: Colors.black,
                       ),
