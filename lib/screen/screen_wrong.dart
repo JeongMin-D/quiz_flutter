@@ -27,6 +27,7 @@ class WrongScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text('오답노트'),
+          backgroundColor: Color(0xff3338ca),
           actions: <Widget>[
             new IconButton(
               icon: new Icon(Icons.home),

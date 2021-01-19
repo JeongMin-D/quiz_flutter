@@ -71,7 +71,7 @@ class _QuizmulState extends State<Quizmul> {
             duration: _timer,
             isReverse: true,
             isReverseAnimation: true,
-            fillColor: Colors.blue,
+            fillColor: Color(0xff3338ca),
             backgroundColor: Colors.white,
             height: 80,
             width: 80,
@@ -138,7 +138,7 @@ class _QuizmulState extends State<Quizmul> {
                       ? Text('결과보기')
                       : Text('다음문제'),
                   textColor: Colors.white,
-                  color: Colors.blue,
+                  color: Color(0xff3338ca),
                   onPressed: _answers[_currentIndex] == -1
                       ? null
                       : () {

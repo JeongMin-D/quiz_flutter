@@ -27,7 +27,7 @@ class ResultScreen extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: Text('My Quiz APP'),
-            backgroundColor: Colors.blue,
+            backgroundColor: Color(0xff3338ca),
             leading: Container(),
             actions: <Widget>[
               new IconButton(
@@ -45,8 +45,8 @@ class ResultScreen extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.blue),
-                color: Colors.blue,
+                border: Border.all(color: Color(0xff3338ca)),
+                color: Color(0xff3338ca),
               ),
               width: width * 0.85,
               height: height * 0.5,
@@ -58,7 +58,7 @@ class ResultScreen extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.blue),
+                      border: Border.all(color: Color(0xff3338ca)),
                       color: Colors.white,
                     ),
                     width: width * 0.73,

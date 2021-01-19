@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
           key: _scaffoldKey,
           appBar: AppBar(
             title: Text('주원통운과 함께'),
-            backgroundColor: Colors.blue,
+            backgroundColor: Color(0xff3338ca),
             leading: Container(),
           ),
           body: Column(
@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         'OX',
                         style: TextStyle(color: Colors.white),
                       ),
-                      color: Colors.blue,
+                      color: Color(0xff3338ca),
                       onPressed: () {
                         _scaffoldKey.currentState.showSnackBar(
                           SnackBar(
@@ -164,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         '객관식',
                         style: TextStyle(color: Colors.white),
                       ),
-                      color: Colors.blue,
+                      color: Color(0xff3338ca),
                       onPressed: () {
                         _scaffoldKey.currentState.showSnackBar(
                           SnackBar(
@@ -208,7 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         '기출문제',
                         style: TextStyle(color: Colors.white),
                       ),
-                      color: Colors.blue,
+                      color: Color(0xff3338ca),
                       onPressed: () {
                         _scaffoldKey.currentState.showSnackBar(
                           SnackBar(
