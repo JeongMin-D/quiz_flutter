@@ -15,8 +15,8 @@ class _CandWidgetState extends State<CandWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.width * 1,
-      height: widget.width * 0.15,
+      width: widget.width * 0.8,
+      height: widget.width * 0.17,
       padding: EdgeInsets.fromLTRB(
         widget.width * 0.048,
         widget.width * 0.024,
@@ -31,6 +31,8 @@ class _CandWidgetState extends State<CandWidget> {
       child: InkWell(
         child: Text(
           widget.text,
+          textAlign: TextAlign.center,
+          overflow: TextOverflow.visible,
           style: TextStyle(
             fontSize: widget.width * 0.035,
             color: widget.answerState ? Colors.white : Colors.black,
