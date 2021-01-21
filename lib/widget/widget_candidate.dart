@@ -15,8 +15,8 @@ class _CandWidgetState extends State<CandWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.width * 0.8,
-      height: widget.width * 0.1,
+      width: widget.width * 1,
+      height: widget.width * 0.15,
       padding: EdgeInsets.fromLTRB(
         widget.width * 0.048,
         widget.width * 0.024,
