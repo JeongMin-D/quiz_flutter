@@ -49,7 +49,7 @@ class ResultScreen extends StatelessWidget {
                 color: Color(0xff3338ca),
               ),
               width: width * 0.85,
-              height: height * 0.5,
+              height: height * 0.6,
               child: Column(
                 children: <Widget>[
                   Padding(

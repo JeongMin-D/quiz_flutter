@@ -38,8 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       isLoading = true;
     });
-    final response =
-        await http.get('https://quiz-api-server.herokuapp.com/quiz/Mul/10');
+    final response = await http
+        .get('https://quiz-api-server.herokuapp.com/quiz/Challenge/10/');
     if (response.statusCode == 200) {
       setState(() {
         quizs = parseQuizs(utf8.decode(response.bodyBytes));
@@ -54,8 +54,8 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       isLoading = true;
     });
-    final response =
-        await http.get('https://quiz-api-server.herokuapp.com/quiz/Test/8');
+    final response = await http
+        .get('https://quiz-api-server.herokuapp.com/quiz/Challenge/10/');
     if (response.statusCode == 200) {
       setState(() {
         quizs = parseQuizs(utf8.decode(response.bodyBytes));

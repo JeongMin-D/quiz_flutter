@@ -15,13 +15,14 @@ class Quiztest extends StatefulWidget {
 }
 
 class _QuiztestState extends State<Quiztest> {
-  var _answers = List.filled(8, -1); //문제 수를 정하기 위해 첫번째 숫자를 바꿔주세요.
+  var _answers = List.filled(10, -1); //문제 수를 정하기 위해 첫번째 숫자를 바꿔주세요.
   //List<int> _answers = [-1, -1, -1];
   List<bool> _answerState = [false, false, false, false];
   int _currentIndex = 0;
   SwiperController _controller = SwiperController();
   CountDownController timerController = CountDownController();
   int _timer = timer;
+  int life = 3;
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +89,22 @@ class _QuiztestState extends State<Quiztest> {
                   ),
                 );
               } else {
+                if (widget.quizs[_currentIndex].answer !=
+                    _answers[_currentIndex]) {
+                  life -= 1;
+                  if (life == 0) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ResultScreen(
+                          answers: _answers,
+                          quizs: widget.quizs,
+                        ),
+                      ),
+                    );
+                  }
+                }
+
                 _answerState = [false, false, false, false];
                 _currentIndex += 1;
                 _controller.next();
@@ -98,6 +115,16 @@ class _QuiztestState extends State<Quiztest> {
             padding: EdgeInsets.fromLTRB(0, width * 0.024, 0, width * 0.024),
             child: Text(
               'Q' + (_currentIndex + 1).toString() + '.',
+              style: TextStyle(
+                fontSize: width * 0.06,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(0, width * 0.024, 0, width * 0.024),
+            child: Text(
+              'Life: ' + (life).toString(),
               style: TextStyle(
                 fontSize: width * 0.06,
                 fontWeight: FontWeight.bold,
@@ -151,7 +178,33 @@ class _QuiztestState extends State<Quiztest> {
                                 ),
                               ),
                             );
+                          } else if (life == 0) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ResultScreen(
+                                  answers: _answers,
+                                  quizs: widget.quizs,
+                                ),
+                              ),
+                            );
                           } else {
+                            if (widget.quizs[_currentIndex].answer !=
+                                _answers[_currentIndex]) {
+                              life -= 1;
+                              if (life == 0) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ResultScreen(
+                                      answers: _answers,
+                                      quizs: widget.quizs,
+                                    ),
+                                  ),
+                                );
+                              }
+                            }
+
                             _answerState = [false, false, false, false];
                             _currentIndex += 1;
                             _controller.next();

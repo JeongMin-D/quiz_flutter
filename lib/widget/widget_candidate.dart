@@ -15,16 +15,16 @@ class _CandWidgetState extends State<CandWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.width * 0.8,
-      height: widget.width * 0.17,
+      width: widget.width * 1,
+      height: widget.width * 0.15,
       padding: EdgeInsets.fromLTRB(
-        widget.width * 0.048,
         widget.width * 0.024,
-        widget.width * 0.048,
+        widget.width * 0.024,
+        widget.width * 0.024,
         widget.width * 0.024,
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(0),
         border: Border.all(color: Color(0xff3338ca)),
         color: widget.answerState ? Color(0xff3338ca) : Colors.white,
       ),
@@ -34,7 +34,7 @@ class _CandWidgetState extends State<CandWidget> {
           textAlign: TextAlign.center,
           overflow: TextOverflow.visible,
           style: TextStyle(
-            fontSize: widget.width * 0.035,
+            fontSize: widget.width * 0.034,
             color: widget.answerState ? Colors.white : Colors.black,
           ),
         ),

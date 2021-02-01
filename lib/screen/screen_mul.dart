@@ -23,6 +23,8 @@ class _QuizmulState extends State<Quizmul> {
   CountDownController timerController = CountDownController();
   int _timer = timer;
 
+  int life = 3;
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -193,7 +195,7 @@ class _QuizmulState extends State<Quizmul> {
 
       _children.add(
         Padding(
-          padding: EdgeInsets.all(width * 0.024),
+          padding: EdgeInsets.all(width * 0.012),
         ),
       );
     }
