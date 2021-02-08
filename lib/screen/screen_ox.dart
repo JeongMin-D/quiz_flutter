@@ -23,6 +23,56 @@ class _QuizoxState extends State<Quizox> {
   CountDownController timerController = CountDownController();
   int _timer = timer;
 
+  void _showDialog_cor() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        Future.delayed(Duration(seconds: 1), () {
+          Navigator.pop(context);
+        });
+
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+          content: SizedBox(
+            height: 200,
+            child: Center(
+                child: SizedBox(
+              child: Text("정답입니다."),
+              height: 50.0,
+              width: 50.0,
+            )),
+          ),
+        );
+      },
+    );
+  }
+
+  void _showDialog_wro() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        Future.delayed(Duration(seconds: 1), () {
+          Navigator.pop(context);
+        });
+
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+          content: SizedBox(
+            height: 200,
+            child: Center(
+                child: SizedBox(
+              child: Text("오답입니다."),
+              height: 50.0,
+              width: 50.0,
+            )),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -90,7 +140,7 @@ class _QuizoxState extends State<Quizox> {
               } else {
                 _answerState = [false, false];
                 _currentIndex += 1;
-                _controller.next();
+                // _controller.next();
               }
             },
           )),
@@ -186,6 +236,12 @@ class _QuizoxState extends State<Quizox> {
                 }
               }
             });
+            if (widget.quizs[_currentIndex].answer == _answers[_currentIndex]) {
+              _showDialog_cor();
+            } else if (widget.quizs[_currentIndex].answer !=
+                _answers[_currentIndex]) {
+              _showDialog_wro();
+            }
           },
         ),
       );

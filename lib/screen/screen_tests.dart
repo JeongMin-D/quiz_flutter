@@ -25,21 +25,12 @@ class _QuiztestState extends State<Quiztest> {
   CountDownController timerController = CountDownController();
   int _timer = timer;
   int life = 3;
-  bool _loading;
-  double _progressValue;
-
-  @override
-  void initState() {
-    super.initState();
-    _loading = false;
-    _progressValue = 1.0;
-  }
 
   void _showDialog_cor() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        Future.delayed(Duration(seconds: 3), () {
+        Future.delayed(Duration(seconds: 1), () {
           Navigator.pop(context);
         });
 
@@ -60,19 +51,29 @@ class _QuiztestState extends State<Quiztest> {
     );
   }
 
-  void _updateProgress() {
-    const oneSec = const Duration(seconds: 1);
-    new Timer.periodic(oneSec, (Timer t) {
-      setState(() {
-        _progressValue -= 0.1;
-        // we "finish" downloading here
-        if (_progressValue.toStringAsFixed(1) == '0.0') {
-          _loading = false;
-          t.cancel();
-          return;
-        }
-      });
-    });
+  void _showDialog_wro() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        Future.delayed(Duration(seconds: 1), () {
+          Navigator.pop(context);
+        });
+
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+          content: SizedBox(
+            height: 200,
+            child: Center(
+                child: SizedBox(
+              child: Text("오답입니다."),
+              height: 50.0,
+              width: 50.0,
+            )),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -130,7 +131,6 @@ class _QuiztestState extends State<Quiztest> {
               print("passed");
 
               if (_currentIndex == widget.quizs.length - 1) {
-                _showDialog_cor();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -144,8 +144,7 @@ class _QuiztestState extends State<Quiztest> {
                 if (widget.quizs[_currentIndex].answer !=
                     _answers[_currentIndex]) {
                   life -= 1;
-                  _showDialog_cor();
-                  if (life == 0) {
+                  if (life <= 0) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -160,21 +159,10 @@ class _QuiztestState extends State<Quiztest> {
 
                 _answerState = [false, false, false, false];
                 _currentIndex += 1;
-                _controller.next();
-                _loading = !_loading;
-                _progressValue = 1.0;
-                _updateProgress();
+                // _controller.next();
               }
             },
           )),
-          Container(
-            margin: new EdgeInsets.only(left: 50, right: 50),
-            child: LinearProgressIndicator(
-              backgroundColor: Colors.black,
-              value: _progressValue,
-              minHeight: 5,
-            ),
-          ),
           Container(
             padding: EdgeInsets.fromLTRB(0, width * 0.024, 0, width * 0.024),
             child: Text(
@@ -233,7 +221,6 @@ class _QuiztestState extends State<Quiztest> {
                       ? null
                       : () {
                           if (_currentIndex == widget.quizs.length - 1) {
-                            _showDialog_cor();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -243,8 +230,7 @@ class _QuiztestState extends State<Quiztest> {
                                 ),
                               ),
                             );
-                          } else if (life == 0) {
-                            _showDialog_cor();
+                          } else if (life <= 0) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -258,9 +244,7 @@ class _QuiztestState extends State<Quiztest> {
                             if (widget.quizs[_currentIndex].answer !=
                                 _answers[_currentIndex]) {
                               life -= 1;
-                              _showDialog_cor();
-                              if (life == 0) {
-                                _showDialog_cor();
+                              if (life <= 0) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -307,6 +291,12 @@ class _QuiztestState extends State<Quiztest> {
                 }
               }
             });
+            if (widget.quizs[_currentIndex].answer == _answers[_currentIndex]) {
+              _showDialog_cor();
+            } else if (widget.quizs[_currentIndex].answer !=
+                _answers[_currentIndex]) {
+              _showDialog_wro();
+            }
           },
         ),
       );
