@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -23,6 +25,30 @@ class _QuiztestState extends State<Quiztest> {
   CountDownController timerController = CountDownController();
   int _timer = timer;
   int life = 3;
+  bool _loading;
+  double _progressValue;
+
+  @override
+  void initState() {
+    super.initState();
+    _loading = false;
+    _progressValue = 1.0;
+  }
+
+  void _updateProgress() {
+    const oneSec = const Duration(seconds: 1);
+    new Timer.periodic(oneSec, (Timer t) {
+      setState(() {
+        _progressValue -= 0.1;
+        // we "finish" downloading here
+        if (_progressValue.toStringAsFixed(1) == '0.0') {
+          _loading = false;
+          t.cancel();
+          return;
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,9 +134,21 @@ class _QuiztestState extends State<Quiztest> {
                 _answerState = [false, false, false, false];
                 _currentIndex += 1;
                 _controller.next();
+                _loading = !_loading;
+                _progressValue = 1.0;
+                _updateProgress();
               }
             },
           )),
+          Container(
+            margin: new EdgeInsets.only(left: 50, right: 50),
+            child: LinearProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+              backgroundColor: Colors.black,
+              value: _progressValue,
+              minHeight: 5,
+            ),
+          ),
           Container(
             padding: EdgeInsets.fromLTRB(0, width * 0.024, 0, width * 0.024),
             child: Text(
