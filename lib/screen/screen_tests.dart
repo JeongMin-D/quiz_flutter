@@ -35,6 +35,31 @@ class _QuiztestState extends State<Quiztest> {
     _progressValue = 1.0;
   }
 
+  void _showDialog_cor() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        Future.delayed(Duration(seconds: 3), () {
+          Navigator.pop(context);
+        });
+
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+          content: SizedBox(
+            height: 200,
+            child: Center(
+                child: SizedBox(
+              child: Text("정답입니다."),
+              height: 50.0,
+              width: 50.0,
+            )),
+          ),
+        );
+      },
+    );
+  }
+
   void _updateProgress() {
     const oneSec = const Duration(seconds: 1);
     new Timer.periodic(oneSec, (Timer t) {
@@ -105,6 +130,7 @@ class _QuiztestState extends State<Quiztest> {
               print("passed");
 
               if (_currentIndex == widget.quizs.length - 1) {
+                _showDialog_cor();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -118,6 +144,7 @@ class _QuiztestState extends State<Quiztest> {
                 if (widget.quizs[_currentIndex].answer !=
                     _answers[_currentIndex]) {
                   life -= 1;
+                  _showDialog_cor();
                   if (life == 0) {
                     Navigator.push(
                       context,
@@ -143,7 +170,6 @@ class _QuiztestState extends State<Quiztest> {
           Container(
             margin: new EdgeInsets.only(left: 50, right: 50),
             child: LinearProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
               backgroundColor: Colors.black,
               value: _progressValue,
               minHeight: 5,
@@ -207,6 +233,7 @@ class _QuiztestState extends State<Quiztest> {
                       ? null
                       : () {
                           if (_currentIndex == widget.quizs.length - 1) {
+                            _showDialog_cor();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -217,6 +244,7 @@ class _QuiztestState extends State<Quiztest> {
                               ),
                             );
                           } else if (life == 0) {
+                            _showDialog_cor();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -230,7 +258,9 @@ class _QuiztestState extends State<Quiztest> {
                             if (widget.quizs[_currentIndex].answer !=
                                 _answers[_currentIndex]) {
                               life -= 1;
+                              _showDialog_cor();
                               if (life == 0) {
+                                _showDialog_cor();
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
